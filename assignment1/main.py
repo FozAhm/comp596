@@ -1,4 +1,5 @@
 from scipy.sparse import csc_matrix
+import matplotlib.pyplot as plt
 import sys
 import string
 
@@ -51,7 +52,7 @@ def import_network(filename, undirected):
 
     return csc_matrix((data, (row, col)), shape=(number_of_nodes, number_of_nodes))
 
-def matrix_degrees(matrix, size):
+def matrix_degrees(matrix, size, undirected=True, total=True):
 
     degrees = []
 
@@ -74,29 +75,44 @@ def degree_distribution(degree_frequency, size):
     
     return [degree,porbability]
 
+def print_degree_distribution(degree_distribution):
 
+    plt.plot(degree_distribution[0], degree_distribution[1], 'bo')
+    plt.yscale('log')
+    plt.xscale('log')
+    plt.title('Degree Destribution')
+    plt.xlabel('Degree')
+    plt.ylabel('Probability of Degree')
+    plt.grid(True)
+    plt.show()
+    plt.close()
 
 network_file = sys.argv[1]
 undirected = str_to_bool(sys.argv[2])
+option = sys.argv[3]
 
+print('Loading Graph from file', network_file, '...')
 sparse_matrix = import_network(network_file, undirected)
-
-nodes = sparse_matrix.get_shape()[1]
-
-print('Number of Nodes:', nodes)
+print('Done Loading')
 #print('Matrix: \n', sparse_matrix.toarray())
 
-degrees = matrix_degrees(sparse_matrix, nodes)
+nodes = sparse_matrix.get_shape()[1]
+print('Number of Nodes in Graph:', nodes)
 
-#print(degrees)
+if(option == 'a'):
+    
+    degrees = matrix_degrees(sparse_matrix, nodes)
+    #print(degrees)
 
-degree_frequency = list_frequency(degrees)
+    degree_frequency = list_frequency(degrees)
+    #print(degree_frequency)
 
-#print(degree_frequency)
-
-degree_dist = degree_distribution(degree_frequency, nodes)
-
-print(degree_dist[1])
+    degree_dist = degree_distribution(degree_frequency, nodes)
+    print_degree_distribution(degree_dist)
+elif(option == 'b'):
+    d = {}
+else:
+    print('Incorrect Option Selected...')
 
 
 
