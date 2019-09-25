@@ -1,5 +1,7 @@
 from scipy.sparse import csc_matrix
 import matplotlib.pyplot as plt
+import numpy as np
+import math
 import sys
 import string
 
@@ -52,7 +54,7 @@ def import_network(filename, undirected):
 
     return csc_matrix((data, (row, col)), shape=(number_of_nodes, number_of_nodes))
 
-def matrix_degrees(matrix, size, undirected=True, total=True):
+def matrix_degrees(matrix, size, undirected=True):
 
     degrees = []
 
@@ -61,6 +63,13 @@ def matrix_degrees(matrix, size, undirected=True, total=True):
         col = matrix.getcol(i)
         degrees.append(col.sum())
         #print('Col', i, ':', col.sum(), '\n', col.toarray())
+    
+    if (undirected == False):
+
+        for i in range(size):
+
+            row = matrix.getrow(i)
+            degrees[i] += row.sum()
 
     return degrees
 
@@ -75,15 +84,27 @@ def degree_distribution(degree_frequency, size):
     
     return [degree,porbability]
 
-def print_degree_distribution(degree_distribution):
+def print_scatter_plot(scatter_plot, xaxis='Degree', yaxis='Probability of Degree', title='Degree Destribution:',log=True):
 
-    plt.plot(degree_distribution[0], degree_distribution[1], 'bo')
-    plt.yscale('log')
-    plt.xscale('log')
-    plt.title('Degree Destribution')
-    plt.xlabel('Degree')
-    plt.ylabel('Probability of Degree')
+    if log:
+        fit = np.polyfit(np.log10(scatter_plot[0]), np.log10(scatter_plot[1]), 1)
+    else:
+        fit = np.polyfit(scatter_plot[0], scatter_plot[1], 1)
+
+    best_fit = 'y = ' + str(np.round(fit[0], 6)) + 'x + ' + str(np.round(fit[1], 6)) 
+    
+    plt.plot(scatter_plot[0], scatter_plot[1], 'bo')
+    
+    if log:
+        plt.yscale('log')
+        plt.xscale('log')
+
+    plt.title(title + '\n' + best_fit)
+    plt.xlabel(xaxis)
+    plt.ylabel(yaxis)
+    
     plt.grid(True)
+    
     plt.show()
     plt.close()
 
@@ -101,16 +122,20 @@ print('Number of Nodes in Graph:', nodes)
 
 if(option == 'a'):
     
-    degrees = matrix_degrees(sparse_matrix, nodes)
-    #print(degrees)
+    degrees = matrix_degrees(sparse_matrix, nodes, undirected)
+    #print('Degrees:\n', degrees)
 
     degree_frequency = list_frequency(degrees)
     #print(degree_frequency)
 
     degree_dist = degree_distribution(degree_frequency, nodes)
-    print_degree_distribution(degree_dist)
+    print_scatter_plot(degree_dist)
 elif(option == 'b'):
-    d = {}
+    
+    A3 = sparse_matrix*sparse_matrix*sparse_matrix
+    #print(A3.toarray())
+    A3_diagonal = A3.diagonal()
+    
 else:
     print('Incorrect Option Selected...')
 
