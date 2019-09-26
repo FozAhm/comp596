@@ -1,4 +1,6 @@
 from scipy.sparse import csc_matrix
+from scipy.sparse import csr_matrix
+from scipy.sparse.csgraph import shortest_path
 import matplotlib.pyplot as plt
 import numpy as np
 import math
@@ -17,9 +19,9 @@ def str_to_bool(s):
     else:
          raise ValueError("Cannot covert {} to a bool".format(s))
 
-def list_frequency(list):
+def list_frequency(list, input_dict= {}):
 
-    frequency_dict = {}
+    frequency_dict = input_dict
 
     for degree in list:
 
@@ -37,15 +39,25 @@ def import_network(filename, undirected):
     col = []
     data = []
 
-    for line in file:
-        vertex = line.split()
-        row.append(int(vertex[0]))
-        col.append(int(vertex[1]))
-        data.append(1)
+    if undirected:
 
-        if (undirected and (vertex[1] != vertex[0])):
-            row.append(int(vertex[1]))
-            col.append(int(vertex[0]))
+        for line in file:
+            vertex = line.split()
+            
+            row.append(int(vertex[0]))
+            col.append(int(vertex[1]))
+            data.append(1)
+
+            if((vertex[1] != vertex[0])):
+                row.append(int(vertex[1]))
+                col.append(int(vertex[0]))
+                data.append(1)
+    else:
+
+        for line in file:
+            vertex = line.split()
+            row.append(int(vertex[0]))
+            col.append(int(vertex[1]))
             data.append(1)
     
     file.close()
@@ -58,18 +70,19 @@ def matrix_degrees(matrix, size, undirected=True):
 
     degrees = []
 
-    for i in range(size):
+    if(undirected == True):
+        for i in range(size):
 
-        col = matrix.getcol(i)
-        degrees.append(col.sum())
-        #print('Col', i, ':', col.sum(), '\n', col.toarray())
-    
-    if (undirected == False):
+            col = matrix.getcol(i)
+            degrees.append(col.sum())
+            #print('Col', i, ':', col.sum(), '\n', col.toarray())
+    elif (undirected == False):
 
         for i in range(size):
 
+            col = matrix.getcol(i)
             row = matrix.getrow(i)
-            degrees[i] += row.sum()
+            degrees.append(col.sum() + row.sum())
 
     return degrees
 
@@ -136,13 +149,17 @@ def list_average(lst):
     return list_average
 
 network_file = sys.argv[1]
+file_name = network_file.split('/')
+file_name_split = file_name[1].split('.')
+name = file_name_split[0].capitalize()
+#print('Name:', name)
 undirected = str_to_bool(sys.argv[2])
 option = sys.argv[3]
 
 print('Loading Graph from file', network_file, '...')
 sparse_matrix = import_network(network_file, undirected)
 print('Done Loading')
-#print('Matrix: \n', sparse_matrix.toarray())
+print('Matrix: \n', sparse_matrix.toarray())
 
 number_of_nodes = sparse_matrix.get_shape()[1]
 print('Number of Nodes in Graph:', number_of_nodes)
@@ -156,7 +173,7 @@ if(option == 'a'):
     #print('Degree Frequency: ', degree_frequency)
 
     degree_dist = probability_distribution(degree_frequency, number_of_nodes)
-    print_scatter_plot(degree_dist)
+    print_scatter_plot(degree_dist, title=name + ' Degree Destribution:')
 elif(option == 'b'):
     
     A3 = sparse_matrix*sparse_matrix*sparse_matrix
@@ -175,8 +192,19 @@ elif(option == 'b'):
     #print('Clustering Frequency: \n', clustering_frequency)
 
     clustering_dist = probability_distribution(clustering_frequency, number_of_nodes)
-    print_scatter_plot(clustering_dist, xaxis='Clustering Coeffecient', yaxis='Probability of Clustering Coeffecient', title='Clustering Coeffecient Distribution', log=True, logx=False, tofit=False, message='\nClustering Coeffecient Average: ' + str(np.round(clustering_average, 6)))
+    print_scatter_plot(clustering_dist, xaxis='Clustering Coeffecient', yaxis='Probability of Clustering Coeffecient', title=name + ' Clustering Coeffecient Distribution', log=True, logx=False, tofit=False, message='\nClustering Coeffecient Average: ' + str(np.round(clustering_average, 6)))
+elif (option == 'c'):
+
+    min_dist_matrix = shortest_path(csgraph=sparse_matrix, method='auto', directed = not undirected, return_predecessors=False, unweighted=True)
+    print('Minimum Distance Matrix:\n', min_dist_matrix)
+
+    min_dist_frequency = {}
+
+    for i in range(number_of_nodes):
+        min_dist_frequency = list_frequency(min_dist_matrix[i], min_dist_frequency)
     
+    print('Minimum Distance Frequency:\n', min_dist_frequency)
+
 else:
     print('Incorrect Option Selected...')
 
