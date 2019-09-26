@@ -92,6 +92,7 @@ def probability_distribution(frequency, size):
     porbability = []
 
     for key, value in frequency.items():
+        #print('Key:', key, 'Value:', value, 'Size:', size)
         degree.append(key)
         porbability.append(value/size)
     
@@ -159,7 +160,7 @@ option = sys.argv[3]
 print('Loading Graph from file', network_file, '...')
 sparse_matrix = import_network(network_file, undirected)
 print('Done Loading')
-print('Matrix: \n', sparse_matrix.toarray())
+#print('Matrix: \n', sparse_matrix.toarray())
 
 number_of_nodes = sparse_matrix.get_shape()[1]
 print('Number of Nodes in Graph:', number_of_nodes)
@@ -196,14 +197,35 @@ elif(option == 'b'):
 elif (option == 'c'):
 
     min_dist_matrix = shortest_path(csgraph=sparse_matrix, method='auto', directed = not undirected, return_predecessors=False, unweighted=True)
-    print('Minimum Distance Matrix:\n', min_dist_matrix)
+    #print('Minimum Distance Matrix:\n', min_dist_matrix)
 
     min_dist_frequency = {}
 
     for i in range(number_of_nodes):
         min_dist_frequency = list_frequency(min_dist_matrix[i], min_dist_frequency)
+    #print('Minimum Distance Frequency:\n', min_dist_frequency)
     
-    print('Minimum Distance Frequency:\n', min_dist_frequency)
+    number_min_dist_val = number_of_nodes*number_of_nodes
+    #print('Number of Minimum Distance Values:', number_min_dist_val)
+
+    if float('Inf') in min_dist_frequency:
+        infinity_number = min_dist_frequency.pop(float('Inf'))
+        number_min_dist_val = number_min_dist_val - infinity_number 
+
+    #print('Number of Minimum Distance Values:', number_min_dist_val)
+    #print('Minimum Distance Frequency:\n', min_dist_frequency)
+
+    # Calculate Average
+    min_dist_average = 0
+
+    for key, value in min_dist_frequency.items():
+        min_dist_average += (key * value)
+    
+    min_dist_average = min_dist_average/number_min_dist_val
+
+    min_dist_dist = probability_distribution(min_dist_frequency, number_min_dist_val)
+    #print('Minimum Distance Distribution: \n', min_dist_dist)
+    print_scatter_plot(min_dist_dist, xaxis='Minimum Distance', yaxis='Probability of Minimum Distance', title=name + ' Minimum Distance Distribution', log=False, logx=False, tofit=False, message='\nMinimum Distance Average: ' + str(np.round(min_dist_average, 6)))
 
 else:
     print('Incorrect Option Selected...')
