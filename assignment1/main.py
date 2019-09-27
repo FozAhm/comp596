@@ -151,6 +151,22 @@ def list_average(lst):
 
     return list_average
 
+def gcc_percentage(labels_frequency, number_of_nodes):
+
+    highest_key = 0
+    highest_value = 0
+
+    for key, value in labels_frequency.items():
+        
+        if value > highest_value:
+
+            highest_value = value
+            highest_key = key
+    
+    print('Number of Nodes in the GCC:', highest_value)
+    
+    return ((highest_value/number_of_nodes)*100)
+
 network_file = sys.argv[1]
 file_name = network_file.split('/')
 file_name_split = file_name[1].split('.')
@@ -232,6 +248,13 @@ elif(option == 'd'):
 
     number_of_components, labels = connected_components(csgraph=sparse_matrix, directed= not undirected)
     print('Number of Connected Components:', number_of_components)
+
+    component_frequency = list_frequency(labels)
+    #print('Component Frequency: \n', component_frequency)
+    gcc_percent = gcc_percentage(component_frequency, number_of_nodes)
+
+    print('Percentage of Nodes in the Greatest Connected Component:', np.round(gcc_percent, 2), '%')
+
 else:
     print('Incorrect Option Selected...')
 
