@@ -10,6 +10,11 @@ import math
 import sys
 import string
 
+#TO USE
+# First arguemnt should be path ot graph file
+# Second Argument should be weather thisthe supplied graph is undirected or not by 'True' or 'False'
+# Third Argument corresponds to what you want to calculate based on the assignment (a-g)
+
 def str_to_bool(s):
     if s == 'True':
          return True
@@ -137,7 +142,7 @@ def calculate_clustering(A3_diagonal, degrees, size):
 
         degree = degrees[i]
 
-        if (A3_diagonal[i] == 0):
+        if ((A3_diagonal[i] == 0) or ((degree-1) < 1)):
             clustering.append(0)
         else:
             clustering.append(A3_diagonal[i]/(degree*(degree-1)))
@@ -292,14 +297,19 @@ elif (option == 'c'):
     print_scatter_plot(min_dist_dist, xaxis='Minimum Distance', yaxis='Probability of Minimum Distance', title=name + ' Minimum Distance Distribution', log=False, logx=False, tofit=False, message='\nMinimum Distance Average: ' + str(np.round(min_dist_average, 6)))
 elif(option == 'd'):
 
+    file = open(str.lower(name)+'-d.txt', 'w')
+
     number_of_components, labels = connected_components(csgraph=sparse_matrix, directed= not undirected)
     print('Number of Connected Components:', number_of_components)
+    file.write('Number of Connected Components:' + str(number_of_components)+ '\n')
 
     component_frequency = list_frequency(labels)
     #print('Component Frequency: \n', component_frequency)
     gcc_percent = gcc_percentage(component_frequency, number_of_nodes)
 
     print('Percentage of Nodes in the Greatest Connected Component:', np.round(gcc_percent, 2), '%')
+    file.write('Percentage of Nodes in the Greatest Connected Component:' + str(np.round(gcc_percent, 2)) + '%')
+    file.close()
 elif(option == 'e'):
     laplace_matrix = csgraph.laplacian(sparse_matrix, normed=False)
     eigen_values, eigen_vectors = eigs(laplace_matrix.asfptype(), number_of_nodes-2)
