@@ -1,6 +1,8 @@
 from scipy.sparse import csc_matrix
 from scipy.sparse import csr_matrix
 from scipy.sparse.csgraph import shortest_path
+from scipy.sparse.csgraph import connected_components
+from scipy.sparse.linalg import eigs
 import matplotlib.pyplot as plt
 import numpy as np
 import math
@@ -226,7 +228,10 @@ elif (option == 'c'):
     min_dist_dist = probability_distribution(min_dist_frequency, number_min_dist_val)
     #print('Minimum Distance Distribution: \n', min_dist_dist)
     print_scatter_plot(min_dist_dist, xaxis='Minimum Distance', yaxis='Probability of Minimum Distance', title=name + ' Minimum Distance Distribution', log=False, logx=False, tofit=False, message='\nMinimum Distance Average: ' + str(np.round(min_dist_average, 6)))
+elif(option == 'd'):
 
+    number_of_components, labels = connected_components(csgraph=sparse_matrix, directed= not undirected)
+    print('Number of Connected Components:', number_of_components)
 else:
     print('Incorrect Option Selected...')
 
