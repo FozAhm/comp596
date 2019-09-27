@@ -159,6 +159,7 @@ def list_average(lst):
 
 def gcc_percentage(labels_frequency, number_of_nodes):
 
+    highest_key = 0
     highest_value = 0
 
     for key, value in labels_frequency.items():
@@ -166,6 +167,7 @@ def gcc_percentage(labels_frequency, number_of_nodes):
         if value > highest_value:
 
             highest_value = value
+            highest_key = key
     
     print('Number of Nodes in the GCC:', highest_value)
     
