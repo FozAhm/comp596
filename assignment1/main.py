@@ -167,6 +167,37 @@ def gcc_percentage(labels_frequency, number_of_nodes):
     
     return ((highest_value/number_of_nodes)*100)
 
+def degree_list(filename):
+    file = open(filename, 'r')
+
+    v1 = []
+    v2 = []
+    lines = 0
+
+    for line in file:
+        vertex = line.split()
+        lines += 1
+        
+        v1.append(int(vertex[0]))
+        v2.append(int(vertex[1]))
+
+    file.close()
+
+    return [v1, v2], lines
+
+def degree_correlation(degree_lst, lines, degrees):
+
+    #print(degree_lst, lines, degrees)
+
+    d1 = []
+    d2 = []
+
+    for i in range(lines):
+        d1.append(degrees[degree_lst[0][i]])
+        d2.append(degrees[degree_lst[1][i]])
+
+    return [d1, d2]
+
 network_file = sys.argv[1]
 file_name = network_file.split('/')
 file_name_split = file_name[1].split('.')
@@ -254,7 +285,31 @@ elif(option == 'd'):
     gcc_percent = gcc_percentage(component_frequency, number_of_nodes)
 
     print('Percentage of Nodes in the Greatest Connected Component:', np.round(gcc_percent, 2), '%')
+elif(option == 'e'):
+    eigen_values, eigen_vectors = eigs(sparse_matrix.asfptype(), number_of_nodes-2)
+    print('Eigen Values:\n', np.absolute(eigen_values[0]))
+elif(option == 'f'):
 
+    degree_lst, lines = degree_list(network_file)
+    #print('Degree List:\n', degree_lst)
+    #print('Number of Lines:\n', lines)
+
+    degree_correlations = degree_correlation(degree_lst, lines, degrees)
+    #print('Degree Correlations:\n', degree_correlations)
+
+    print_scatter_plot(degree_correlations, xaxis='di', yaxis='dj', title=name+' Degree Correlation', log=False, logx=False, tofit=False)
+elif(option == 'g'):
+
+    A3 = sparse_matrix*sparse_matrix*sparse_matrix
+    #print('A3 Matrix: \n', A3.toarray())
+
+    A3_diagonal = A3.diagonal()
+    #print('A3 Diaganol: ', A3_diagonal)
+
+    clustering_list = calculate_clustering(A3_diagonal, degrees, number_of_nodes)
+    #print('Clustering: \n',clustering_list)
+
+    print_scatter_plot([degrees, clustering_list], xaxis='degree i', yaxis='clustering coeffecient i', title=name + ' Degree vs Clustering Coeffecient', log=False, logx=False, tofit=False)
 else:
     print('Incorrect Option Selected...')
 
