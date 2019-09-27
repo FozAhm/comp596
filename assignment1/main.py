@@ -1,5 +1,6 @@
 from scipy.sparse import csc_matrix
 from scipy.sparse import csr_matrix
+from scipy.sparse import csgraph
 from scipy.sparse.csgraph import shortest_path
 from scipy.sparse.csgraph import connected_components
 from scipy.sparse.linalg import eigs
@@ -198,6 +199,20 @@ def degree_correlation(degree_lst, lines, degrees):
 
     return [d1, d2]
 
+def spectral_gap(eigen_values):
+    
+    max_val = 0
+    min_val = 100
+
+    for value in eigen_values:
+
+        if value > max_val:
+            max_val = value
+        if ((value > 0) and (value < min_val)):
+            min_val = value
+    
+    return max_val-min_val
+
 network_file = sys.argv[1]
 file_name = network_file.split('/')
 file_name_split = file_name[1].split('.')
@@ -286,8 +301,20 @@ elif(option == 'd'):
 
     print('Percentage of Nodes in the Greatest Connected Component:', np.round(gcc_percent, 2), '%')
 elif(option == 'e'):
-    eigen_values, eigen_vectors = eigs(sparse_matrix.asfptype(), number_of_nodes-2)
-    print('Eigen Values:\n', np.absolute(eigen_values[0]))
+    laplace_matrix = csgraph.laplacian(sparse_matrix, normed=False)
+    eigen_values, eigen_vectors = eigs(laplace_matrix.asfptype(), number_of_nodes-2)
+    eigen_values = np.absolute(eigen_values)
+    eigen_values = np.round(eigen_values, 2)
+    number_of_eigen_values = len(eigen_values)
+    #print('Eigen Values:\n', eigen_values)
+
+    spectral_gap_val = spectral_gap(eigen_values)
+
+    eigen_values_frequency = list_frequency(eigen_values)
+    #print('Eigen Value Frequencies:\n', eigen_values_frequency)
+
+    eigen_dist = probability_distribution(eigen_values_frequency, number_of_eigen_values)
+    print_scatter_plot(eigen_dist, xaxis='Eigen Value', yaxis='Probability of Eigen Value', title=name + ' Eigen Value Distribution', log=True, logx=True, tofit=False, message='\nSpectral Gap: ' + str(spectral_gap_val))
 elif(option == 'f'):
 
     degree_lst, lines = degree_list(network_file)
