@@ -170,6 +170,7 @@ def gcc_percentage(labels_frequency, number_of_nodes):
             highest_key = key
     
     print('Number of Nodes in the GCC:', highest_value)
+    print('Component Number:', highest_key)
     
     return ((highest_value/number_of_nodes)*100)
 
