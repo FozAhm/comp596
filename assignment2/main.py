@@ -100,6 +100,7 @@ def louvain(G, number_of_nodes, matlab_bs=False):
     #print('Louvain Communities:\n', louvain)
     louvain_labels_predicted, num_of_communities_louvain = get_predicted_label_from_louvain(louvain, number_of_nodes, matlab_bs)
     print('Number of Communities with Louvain:', num_of_communities_louvain)
+    print('Modularity:', community.modularity(louvain, G))
     #print('Louvain Truth Labels:\n', louvain_labels_predicted)
 
     return louvain_labels_predicted
