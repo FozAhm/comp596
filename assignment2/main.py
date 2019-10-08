@@ -37,6 +37,7 @@ def convert_to_networkx(labels, graph):
     
     return G
 
+# Gets Ground truth from data supplied by file
 def get_ground_truth_labels_from_graph(G):
 
     ground_truths = []
@@ -46,6 +47,7 @@ def get_ground_truth_labels_from_graph(G):
     
     return ground_truths
 
+# Gets Lablels in Array corresponding to Nodes from a Nestered Community Label Arhitecture 
 def get_labels_from_community(communities, num_of_nodes, matlab_bs=False):
 
     i = 0
@@ -62,6 +64,7 @@ def get_labels_from_community(communities, num_of_nodes, matlab_bs=False):
     
     return labels
 
+# Gets Lablels in Array corresponding to Nodes from a Louvain Community Dictionary
 def get_predicted_label_from_louvain(communities, num_of_nodes, matlab_bs=False):
     
     labels = list(range(num_of_nodes))
@@ -122,20 +125,20 @@ def calculate_nmi_ars(truth, prediction):
 def calculate_community(G, number_of_nodes, labels_truth, matlab_bs=False):
 
     clauset_labels_predicted = clauset(G, number_of_nodes, matlab_bs)
-    clauset_nmi_ars = calculate_nmi_ars(labels_truth, clauset_labels_predicted)
+    calculate_nmi_ars(labels_truth, clauset_labels_predicted)
 
     louvain_labels_predicted = louvain(G, number_of_nodes, matlab_bs)
-    louvain_nmi_ars = calculate_nmi_ars(labels_truth, louvain_labels_predicted)
+    calculate_nmi_ars(labels_truth, louvain_labels_predicted)
 
     k_clique_labels_predicted = k_clique(G, number_of_nodes, matlab_bs)
-    k_clique_nmi_ars = calculate_nmi_ars(labels_truth, k_clique_labels_predicted)
+    calculate_nmi_ars(labels_truth, k_clique_labels_predicted)
 
 
 # Loading command line arguments
 option = sys.argv[1]
 file_name = sys.argv[2]
 
-
+# Real Classic Data OPtion
 if option == 'a':
     print('\nReal Data -', file_name)
 
@@ -152,6 +155,7 @@ if option == 'a':
 
     calculate_community(G, number_of_nodes, labels_truth, matlab_bs)
 
+# GCN Data Analysis
 elif option == 'b':
     print('GNC Data - ', file_name)
 
@@ -177,9 +181,11 @@ elif option == 'b':
 
     calculate_community(G, number_of_nodes, labels_truth)
 
+# Synthetic Data Analysis
 elif option == 'c':
     print('Synthetic Data - No File')
 
+    # Settings provided by the prof
     n = 1000
     tau1 = 3
     tau2 = 1.5
