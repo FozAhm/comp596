@@ -1,4 +1,5 @@
 import sys
+import csv
 import random
 import community
 import numpy as np
@@ -11,6 +12,12 @@ from networkx.algorithms import node_classification
 from networkx.algorithms.community import LFR_benchmark_graph
 from sklearn.metrics.cluster import adjusted_rand_score
 from sklearn.metrics.cluster import normalized_mutual_info_score
+
+# HOW TO RUN - What Command Line Options to Use Each - White Spaces are the Delimiters
+# the First Variable defines what type of data you are working with: 'a' for real-classic, 'b' for gcm data, 'c' for synthetic 
+# The Second Variable is the File Path, please only enter file path without file extension for GCN data, put anything for option c
+# The Third Variable is the name you want to give to the data you running, put anything you wish
+# The Fourth Variable defined what node classification algorithm to use, put 'harmonic' or 'logical'  
 
 # Converts a Binary One Hot Feature Array to a Number
 def convert_onehot_to_integer(array):
@@ -153,7 +160,15 @@ if option == 'a':
         nmi_list.append(nmi)
         ars_list.append(ars)
     
-    print_scatter_plot([drop_factors, nmi_list, ars_list], 'Drop Factor', 'Average NMI', 'Average ARS', name + 'Node Classification')
+    print_scatter_plot([drop_factors, nmi_list, ars_list], 'Drop Factor', 'Average NMI', 'Average ARS', name + ' Node Classification')
+
+    with open(name+'-'+method+'.csv', mode='w') as file:
+        file_writer = csv.writer(file, delimiter=',', quotechar='"', quoting=csv.QUOTE_MINIMAL)
+
+        file_writer.writerow(['DropFactor', 'NMI Score', 'ARS Score'])
+
+        for i in range(len(drop_factors)):
+            file_writer.writerow([drop_factors[i], nmi_list[i], ars_list[i]])
         
 elif option == 'b':
     print('GCN Data - ', name, '\n')
@@ -189,6 +204,12 @@ elif option == 'b':
         del G.node[node]['value']
     
     nmi, ars = calculate_node_classification_accuracy(G, 'value', labels_truth, method)
+
+    with open(name+'-'+method+'.csv', mode='w') as file:
+        file_writer = csv.writer(file, delimiter=',', quotechar='"', quoting=csv.QUOTE_MINIMAL)
+
+        file_writer.writerow(['DropFactor', 'NMI Score', 'ARS Score'])
+        file_writer.writerow([drop_factor, nmi, ars])
 
 elif option == 'c':
     print('Synthetic Data - No File')
@@ -229,4 +250,12 @@ elif option == 'c':
         nmi_list.append(nmi)
         ars_list.append(ars)
     
-    print_scatter_plot([mu_list, nmi_list, ars_list], 'Mu', 'Average NMI', 'Average ARS', ' LFR Benchmark Graph Node Classification')
+    print_scatter_plot([mu_list, nmi_list, ars_list], 'Mu', 'Average NMI', 'Average ARS', 'LFR Benchmark Graph Node Classification')
+
+    with open(name+'-'+method+'.csv', mode='w') as file:
+        file_writer = csv.writer(file, delimiter=',', quotechar='"', quoting=csv.QUOTE_MINIMAL)
+
+        file_writer.writerow(['Mu', 'NMI Score', 'ARS Score'])
+
+        for i in range(len(mu_list)):
+            file_writer.writerow([mu_list[i], nmi_list[i], ars_list[i]])
