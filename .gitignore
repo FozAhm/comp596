@@ -1,5 +1,6 @@
 *.DS_store
 
 project/data/*
+project/2018-01-01-0.json
 actor.edgelist.txt
 citation.edgelist.txt
