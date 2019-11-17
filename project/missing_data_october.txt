@@ -1,0 +1,7 @@
+Data Collection Starting
+Could not retreive data for URL: https://data.gharchive.org/2018-10-21-23.json.gz
+Reason: HTTP Error 404: Not Found
+Could not retreive data for URL: https://data.gharchive.org/2018-10-22-0.json.gz
+Reason: HTTP Error 404: Not Found
+Could not retreive data for URL: https://data.gharchive.org/2018-10-22-1.json.gz
+Reason: HTTP Error 404: Not Found
