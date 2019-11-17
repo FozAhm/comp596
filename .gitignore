@@ -1,4 +1,5 @@
 *.DS_store
 
+project/data/*
 actor.edgelist.txt
 citation.edgelist.txt
