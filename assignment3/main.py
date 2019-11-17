@@ -9,8 +9,8 @@ from copy import deepcopy
 from statistics import mean
 import matplotlib.pyplot as plt
 from networkx.algorithms import node_classification
-from networkx.algorithms.community import LFR_benchmark_graph
 from sklearn.metrics.cluster import adjusted_rand_score
+from networkx.algorithms.community import LFR_benchmark_graph
 from sklearn.metrics.cluster import normalized_mutual_info_score
 
 # HOW TO RUN - What Command Line Options to Use Each - White Spaces are the Delimiters
