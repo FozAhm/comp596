@@ -54,6 +54,8 @@ for day in range(begin_day, end_day):
                         event_writer.writerow([event['repo']['name'], event['payload']['forkee']['full_name']])
                     elif event_type == 'PushEvent':
                         event_writer.writerow([event['actor']['login'], event['repo']['name']])
+                    elif event_type == 'WatchEvent':
+                        event_writer.writerow([event['actor']['login'], event['repo']['name']])
 
 print('Number of Files Scanned:', num_of_files)
 print('Number of', event_type,':', EventCount)
