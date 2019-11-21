@@ -17,6 +17,8 @@ with open(file_path2) as f:
         event = json.loads(line)
         event_types2.add(event['type'])
 
+print('Event Set 1:', event_types1)
+print('Event set 2:', event_types2)
 print(event_types1.difference(event_types2))
 print(event_types2.difference(event_types1))
 
