@@ -23,12 +23,15 @@ all_nodes = {}
 for file in os.listdir(data_directory):
     filename = os.fsdecode(file)
     file_path = data_location + filename
-    
+    print('Looking through', filename, '...')
+
     with open(file_path) as csv_file:
         csv_reader = csv.reader(csv_file, delimiter=',')
 
-        for row in csv_reader:
-            all_nodes[row[0]] = row[1]
+        if event_type == 'Nodes':
+            for row in csv_reader:
+                all_nodes[row[0]] = row[1]
 
-for key,value in all_nodes.items():
-    output_writer.writerow([key, value])
+if event_type == 'Nodes':
+    for key,value in all_nodes.items():
+        output_writer.writerow([key, value])
