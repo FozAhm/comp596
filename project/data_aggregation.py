@@ -39,6 +39,11 @@ for file in os.listdir(data_directory):
                 else:
                     all_objects[key] = 1
 
+if event_type == 'Nodes':
+    for key,value in all_objects.items():
+        output_writer.writerow([key, value])
+elif event_type == 'Edges':
+    for key,value in all_objects.items():
+        output_writer.writerow([key[0], key[1], value])
 
-for key,value in all_objects.items():
-    output_writer.writerow([key, value])
+output_file.close()
