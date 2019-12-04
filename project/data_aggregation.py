@@ -9,7 +9,7 @@ print('Data Aggregation Script')
 
 event_type = sys.argv[1] # Should be Edges or Nodes for aggregation
 data_location = sys.argv[2] # Should be '/Users/fozail/SchoolDev/comp596/project/data/'
-output_location = sys.argv[3] # Should be '/Users/fozail/SchoolDev/comp596/project/edges/'
+output_location = sys.argv[3] # Should be '/Users/fozail/SchoolDev/comp596/project/edges/all_edges.csv'
 
 print('Looking for', event_type)
 
@@ -18,7 +18,7 @@ output_writer = csv.writer(output_file, delimiter=',', quotechar='"', quoting=cs
 
 data_directory = os.fsencode(data_location)
 
-all_nodes = {}
+all_objects = {}
 
 for file in os.listdir(data_directory):
     filename = os.fsdecode(file)
@@ -30,8 +30,15 @@ for file in os.listdir(data_directory):
 
         if event_type == 'Nodes':
             for row in csv_reader:
-                all_nodes[row[0]] = row[1]
+                all_objects[row[0]] = row[1]
+        elif event_type == 'Edges':
+            for row in csv_reader:
+                key = (row[0], row[1])
+                if key in all_objects:
+                    all_objects[key] = all_objects[key] + 1
+                else:
+                    all_objects[key] = 1
 
-if event_type == 'Nodes':
-    for key,value in all_nodes.items():
-        output_writer.writerow([key, value])
+
+for key,value in all_objects.items():
+    output_writer.writerow([key, value])
