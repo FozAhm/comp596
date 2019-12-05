@@ -10,3 +10,5 @@ project/sample_data/2018-03-15-17.json
 project/2018-01-01-0.json
 actor.edgelist.txt
 citation.edgelist.txt
+github.gml
+github.gpickle
