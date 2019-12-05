@@ -8,8 +8,12 @@ start_time = time.time()
 print('Graph Analysis...')
 
 data_location = sys.argv[1]
+read_format = sys.argv[2]
 
-G = nx.read_gml(data_location)
+if read_format == 'gml':
+    G = nx.read_gml(data_location)
+elif read_format == 'gpkl':
+    G = nx.read_gpickle(data_location)
 
 print("--- Graph Load Time ---\n--- %s seconds ---" % (time.time() - start_time))
 
