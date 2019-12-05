@@ -25,5 +25,6 @@ elif option == 'numedges':
     print('Number of Edges:', G.size())
 elif option == 'degreehist':
     degree_list = nx.degree_histogram(G)
+    print(degree_list)
 
 print("--- Total Execution Time ---\n--- %s seconds ---" % (time.time() - start_time))
