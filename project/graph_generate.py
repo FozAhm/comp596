@@ -44,4 +44,5 @@ for file in all_files:
 print('Number of Nodes:', len(G))
 print('Number of Edges:', G.size())
 
-nx.write_gml(G, "github.gml")
+#nx.write_gml(G, "github.gml")
+nx.write_gpickle(G, "github.gpickle")
