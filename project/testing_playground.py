@@ -1,40 +1,15 @@
 print('This is a testing playground')
 
-test_set = {'apple', 'orange', 'lemon'}
-print(test_set)
+import networkx as nx
 
-test_set.add('cherry')
-print(test_set)
+G = nx.Graph()
 
-test_set.add('apple')
-print(test_set)
+G.add_node('Test1', type='user')
+G.add_node('Test2', type='repo')
 
-test_dict = {
-    'linux' : 'repo',
-    'ruby' : 'repo',
-    'fozail' : 'user'
-}
-print(test_dict)
+print(G.nodes['Test1'])
+print(G.nodes.data())
 
-test_dict['sun'] = 'user'
-print(test_dict)
+G.add_edge('Test1', 'Test2', type='watch', weight=1)
 
-test_dict['fozail'] = 'repo'
-print(test_dict)
-
-for key,value in test_dict.items():
-    print('Key:', key, 'Value:', value)
-
-tuple1 = ('loysoft/node-oauth2-server', 'adieuadieu/node-oauth2-server')
-tuple2 = ('django/django', 'm1guelpf/django')
-
-test_dict[tuple1] = 1
-test_dict[tuple2] = 2
-
-for key,value in test_dict.items():
-    print('Key:', key, 'Value:', value)
-
-test_dict[tuple2] = test_dict[tuple2] + 1
-
-for key,value in test_dict.items():
-    print('Key:', key, 'Value:', value)
+print(G.get_edge_data('Test1', 'Test2'))
