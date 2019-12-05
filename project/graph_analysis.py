@@ -9,7 +9,7 @@ print('Graph Analysis...')
 
 data_location = sys.argv[1]
 
-G = nx.read_graphml(data_location)
+G = nx.read_gml(data_location)
 print('Number of Nodes:', len(G))
 print('Number of Edges:', G.size())
 
