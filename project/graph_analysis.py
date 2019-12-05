@@ -27,4 +27,11 @@ elif option == 'degreehist':
     degree_list = nx.degree_histogram(G)
     print(degree_list)
 
+    plt.hist(degree_list)
+    plt.xlabel('Smarts')
+    plt.ylabel('Probability')
+    plt.title('Histogram of IQ')
+    plt.grid(True)
+    plt.savefig('degree_dist.png')
+
 print("--- Total Execution Time ---\n--- %s seconds ---" % (time.time() - start_time))
