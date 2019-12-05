@@ -20,6 +20,8 @@ for file in all_files:
     file_path = data_location + file
     
     with open(file_path) as csv_file:
+
+        print('Going through file:', file)
         
         csv_reader = csv.reader(csv_file, delimiter=',')
     
