@@ -1,5 +1,6 @@
 import networkx as nx
 import matplotlib.pyplot as plt
+import collections
 import sys
 import csv
 import time
@@ -24,14 +25,22 @@ if option == 'numnodes':
 elif option == 'numedges':
     print('Number of Edges:', G.size())
 elif option == 'degreehist':
-    degree_list = nx.degree_histogram(G)
-    print(degree_list)
+    #degree_list = nx.degree_histogram(G)
+    #print(degree_list)
 
-    plt.hist(degree_list)
-    plt.xlabel('Smarts')
-    plt.ylabel('Probability')
-    plt.title('Histogram of IQ')
-    plt.grid(True)
-    plt.savefig('degree_dist.png')
+    degree_sequence = sorted([d for n, d in G.degree()], reverse=True)  # degree sequence
+    # print "Degree sequence", degree_sequence
+    degreeCount = collections.Counter(degree_sequence)
+    deg, cnt = zip(*degreeCount.items())
+
+    fig, ax = plt.subplots()
+    plt.bar(deg, cnt, width=0.80, color='b')
+
+    plt.title("Degree Histogram")
+    plt.ylabel("Count")
+    plt.xlabel("Degree")
+    ax.set_xticks([d + 0.4 for d in deg])
+    ax.set_xticklabels(deg)
+    plt.savefig('degree_dist2.png')
 
 print("--- Total Execution Time ---\n--- %s seconds ---" % (time.time() - start_time))
