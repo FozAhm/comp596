@@ -27,14 +27,19 @@ if option == 'numnodes':
     print('Number of Nodes:', len(G))
 elif option == 'numedges':
     print('Number of Edges:', G.size())
-elif option == 'degreehist':
+elif option == 'degreedist':
+    print('Degree Distribution')
     degree_list = nx.degree_histogram(G)
     #print(degree_list)
 
     x = np.arange(1, len(degree_list)+1)
-
+    plt.xscale('log')
+    plt.yscale('log')
     plt.plot(x, degree_list, 'bo')
+    plt.grid(True)
     plt.savefig('degree_dist.png')
+elif option == 'community':
+    print('Community Detection')
 else:
     print('Wrong Option')
 
