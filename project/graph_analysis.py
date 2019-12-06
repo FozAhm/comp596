@@ -1,6 +1,7 @@
 import networkx as nx
 import matplotlib.pyplot as plt
 import collections
+import numpy as np
 import sys
 import csv
 import time
@@ -30,23 +31,13 @@ while(run):
     elif option == 'numedges':
         print('Number of Edges:', G.size())
     elif option == 'degreehist':
-        #degree_list = nx.degree_histogram(G)
+        degree_list = nx.degree_histogram(G)
         #print(degree_list)
 
-        degree_sequence = sorted([d for n, d in G.degree()], reverse=True)  # degree sequence
-        # print "Degree sequence", degree_sequence
-        degreeCount = collections.Counter(degree_sequence)
-        deg, cnt = zip(*degreeCount.items())
+        x = np.arange(1, len(degree_list))
 
-        fig, ax = plt.subplots()
-        plt.bar(deg, cnt, width=0.80, color='b')
-
-        plt.title("Degree Histogram")
-        plt.ylabel("Count")
-        plt.xlabel("Degree")
-        ax.set_xticks([d + 0.4 for d in deg])
-        ax.set_xticklabels(deg)
-        plt.savefig('degree_dist2.png')
+        plt.plot(x, degree_list, 'bo')
+        plt.savefig('degree_dist.png')
     elif option == 'break':
         run = False
     else:
