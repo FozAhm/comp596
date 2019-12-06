@@ -12,3 +12,4 @@ actor.edgelist.txt
 citation.edgelist.txt
 github.gml
 github.gpickle
+photos/*

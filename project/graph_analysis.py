@@ -34,7 +34,7 @@ elif option == 'degreehist':
     x = np.arange(1, len(degree_list)+1)
 
     plt.plot(x, degree_list, 'bo')
-    plt.savefig('degree_dist.png')
+    plt.savefig('photos/degree_dist.png')
 else:
     print('Wrong Option')
 
