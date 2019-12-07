@@ -11,5 +11,5 @@ project/2018-01-01-0.json
 actor.edgelist.txt
 citation.edgelist.txt
 github.gml
-github.gpickle
+github.gpickle*
 project/photos/*
