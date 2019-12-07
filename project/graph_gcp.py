@@ -33,7 +33,7 @@ for file in os.listdir(data_directory):
             for line in f:
                 event = json.loads(line)
                 if event['email'] != '':
-                    G.add_edge(event['email'], event['r_name'], weight=int(event[total]))
+                    G.add_edge(event['email'], event['r_name'], weight=int(event['total']))
 
 print('Number of Nodes:', len(G))
 print('Number of Edges:', G.size())
