@@ -40,6 +40,10 @@ elif option == 'degreedist':
     plt.savefig('degree_dist.png')
 elif option == 'community':
     print('Community Detection')
+elif option == 'degreecorrel':
+    print('Degree Correlation')
+    r = nx.degree_pearson_correlation_coefficient(G)
+    print('r: ', r)
 else:
     print('Wrong Option')
 
