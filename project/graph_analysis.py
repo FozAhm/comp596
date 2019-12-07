@@ -1,4 +1,5 @@
 import networkx as nx
+from networkx.algorithms.community import greedy_modularity_communities
 import matplotlib.pyplot as plt
 import collections
 import numpy as np
@@ -40,7 +41,7 @@ elif option == 'degreedist':
     plt.savefig('degree_dist.png')
 elif option == 'community':
     print('Community Detection')
-    c = list(nx.algorithms.community.greedy_modularity_communities(G))
+    c = list(greedy_modularity_communities(G))
     print('Community 1:', c[0])
     print('Community 2:', c[1])
 elif option == 'degreecorrel':
