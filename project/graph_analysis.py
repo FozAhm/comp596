@@ -15,6 +15,8 @@ data_location = sys.argv[1]
 read_format = sys.argv[2]
 option = sys.argv[3]
 
+graph_name = data_location.split('/')[-1]
+
 if read_format == 'gml':
     G = nx.read_gml(data_location)
 elif read_format == 'gpkl':
@@ -30,10 +32,14 @@ elif option == 'numedges':
     print('Number of Edges:', G.size())
 elif option == 'degreedist':
     print('Degree Distribution')
+    title = 'Degree Distribution for ' + graph_name
     degree_list = nx.degree_histogram(G)
     #print(degree_list)
 
     x = np.arange(1, len(degree_list)+1)
+    plt.title(title)
+    plt.xlabel('Degree')
+    plt.ylabel('Frequency')
     plt.xscale('log')
     plt.yscale('log')
     plt.plot(x, degree_list, 'bo')

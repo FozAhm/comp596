@@ -1,6 +1,10 @@
 print('This is a testing playground')
 
 import networkx as nx
+import sys
+
+data_location = sys.argv[1]
+print(data_location.split('/')[-1])
 
 G = nx.Graph()
 
