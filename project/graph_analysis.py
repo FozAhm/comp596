@@ -44,7 +44,7 @@ elif option == 'degreecorrel':
     print('Degree Correlation')
     r = nx.degree_pearson_correlation_coefficient(G, weight='weight')
     print('r:', r)
-elif option == 'Global Clustering Coeffecient':
+elif option == 'gcc':
     print('Global Clustering Coeffecient')
     gcc = nx.average_clustering(G, weight='weight')
     print('gcc:', gcc)
