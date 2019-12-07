@@ -44,10 +44,12 @@ elif option == 'degreedist':
     plt.yscale('log')
     plt.plot(x, degree_list, 'bo')
     plt.grid(True)
-    plt.savefig('degree_dist.png')
+    save_name = graph_name + '_degree_dist.png' 
+    plt.savefig(save_name)
 elif option == 'community':
     print('Community Detection')
     c = list(greedy_modularity_communities(G))
+    print('Number of communities:', len(c))
     print('Community 1:', c[0])
     print('Community 2:', c[1])
 elif option == 'degreecorrel':
