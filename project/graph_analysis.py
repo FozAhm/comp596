@@ -41,7 +41,8 @@ elif option == 'degreedist':
 elif option == 'community':
     print('Community Detection')
     c = list(nx.algorithms.community.greedy_modularity_communities(G))
-    print(c[0])
+    print('Community 1:', c[0])
+    print('Community 2:', c[1])
 elif option == 'degreecorrel':
     print('Degree Correlation')
     r = nx.degree_pearson_correlation_coefficient(G)
