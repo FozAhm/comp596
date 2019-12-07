@@ -42,11 +42,11 @@ elif option == 'community':
     print('Community Detection')
 elif option == 'degreecorrel':
     print('Degree Correlation')
-    r = nx.degree_pearson_correlation_coefficient(G, weight='weight')
+    r = nx.degree_pearson_correlation_coefficient(G)
     print('r:', r)
 elif option == 'gcc':
     print('Global Clustering Coeffecient')
-    gcc = nx.average_clustering(G, weight='weight')
+    gcc = nx.average_clustering(G)
     print('gcc:', gcc)
 else:
     print('Wrong Option')
