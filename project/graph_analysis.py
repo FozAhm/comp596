@@ -40,6 +40,8 @@ elif option == 'degreedist':
     plt.savefig('degree_dist.png')
 elif option == 'community':
     print('Community Detection')
+    c = list(nx.algorithms.community.greedy_modularity_communities(G))
+    print(c[0])
 elif option == 'degreecorrel':
     print('Degree Correlation')
     r = nx.degree_pearson_correlation_coefficient(G)
