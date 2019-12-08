@@ -71,9 +71,9 @@ elif option == 'gcc':
     print('gcc:', gcc)
 elif option == 'avgdeg':
     print('Average Degree')
-    degrees = G.degree()
+    degrees = list(G.degree())
     sum_of_degrees = 0
-    for key,value in degrees.items():
+    for key,value in degrees:
         sum_of_degrees += value 
     avgdeg = sum_of_degrees/len(G)
     print(avgdeg)
