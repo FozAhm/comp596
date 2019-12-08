@@ -2,6 +2,7 @@ import networkx as nx
 from networkx.algorithms.community import greedy_modularity_communities
 import matplotlib.pyplot as plt
 import collections
+import powerlaw
 import numpy as np
 import sys
 import csv
@@ -34,7 +35,8 @@ elif option == 'degreedist':
     print('Degree Distribution')
     title = 'Degree Distribution for ' + graph_name
     degree_list = nx.degree_histogram(G)
-    #print(degree_list)
+    results = powerlaw.Fit(degree_list, discrete=True)
+    print('Power Law Alpha:', results.power_law.alpha)
 
     x = np.arange(1, len(degree_list)+1)
     plt.title(title)
