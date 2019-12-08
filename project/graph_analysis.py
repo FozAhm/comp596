@@ -69,6 +69,12 @@ elif option == 'gcc':
     print('Global Clustering Coeffecient')
     gcc = nx.average_clustering(G, weight='weight')
     print('gcc:', gcc)
+elif option == 'avgdeg':
+    print('Average Degree')
+    degrees = G.degree()
+    sum_of_degrees = sum(degrees.values())
+    avgdeg = sum_of_degrees/len(G)
+    print(avgdeg)
 else:
     print('Wrong Option')
 
