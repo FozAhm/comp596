@@ -37,7 +37,7 @@ elif option == 'degreedist':
     results = powerlaw.Fit(degree_list, discrete=True)
     alpha = results.power_law.alpha
     print('Power Law Alpha:', alpha)
-    title = 'Degree Distribution for ' + graph_name + '\nPower Law Alpha Value: ' + alpha 
+    title = 'Degree Distribution for ' + graph_name + '\nPower Law Alpha Value: ' + str(alpha) 
 
     x = np.arange(1, len(degree_list)+1)
     plt.title(title)
