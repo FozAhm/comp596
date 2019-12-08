@@ -54,6 +54,18 @@ Degree Distribution
 
 Power Law Alpha: 1.441947788621313
 
+Average Degree Unweighted
+
+Graph Analysis...
+--- Graph Load Time ---
+--- 380.0671887397766 seconds ---
+Average Degree
+2.7890699649941957
+--- Total Option Execution Time ---
+--- 46.81201457977295 seconds ---
+--- Total Program Execution Time ---
+--- 426.8792757987976 seconds ---
+
 
 GCP Nodes & Edges
 
@@ -82,3 +94,18 @@ r: -0.010008765205873692
 GCP Degree Distribution
 
 Power Law Alpha: 1.5814695063289108
+
+GCP Average Degree Unweighted
+
+Graph Analysis...
+--- Graph Load Time ---
+--- 109.95729088783264 seconds ---
+Average Degree
+15.715670911245738
+--- Total Option Execution Time ---
+--- 5.171754598617554 seconds ---
+--- Total Program Execution Time ---
+--- 115.1291344165802 seconds ---
+
+GCP Average Degree Weighted
+
