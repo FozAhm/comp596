@@ -81,6 +81,19 @@ Average Degree
 --- 507.00767731666565 seconds ---
 
 
+Largest Connected Component
+
+Graph Analysis...
+--- Graph Load Time ---
+--- 376.46112966537476 seconds ---
+Largest Connected Component
+Percentage of Nodes in the LCC: 0.5524676585164798
+--- Total Option Execution Time ---
+--- 1845.3360266685486 seconds ---
+--- Total Program Execution Time ---
+--- 2221.8063702583313 seconds ---
+
+
 GCP Nodes & Edges
 
 GML:
@@ -133,3 +146,15 @@ Average Degree
 --- Total Program Execution Time ---
 --- 150.75429558753967 seconds ---
 
+
+GCP Largest Connected Component
+
+Graph Analysis...
+--- Graph Load Time ---
+--- 107.21710300445557 seconds ---
+Largest Connected Component
+Percentage of Nodes in the LCC: 0.7817181825241136
+--- Total Option Execution Time ---
+--- 743.2626714706421 seconds ---
+--- Total Program Execution Time ---
+--- 850.4798991680145 seconds ---
