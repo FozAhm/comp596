@@ -33,10 +33,11 @@ elif option == 'numedges':
     print('Number of Edges:', G.size())
 elif option == 'degreedist':
     print('Degree Distribution')
-    title = 'Degree Distribution for ' + graph_name
     degree_list = nx.degree_histogram(G)
     results = powerlaw.Fit(degree_list, discrete=True)
-    print('Power Law Alpha:', results.power_law.alpha)
+    alpha = results.power_law.alpha
+    print('Power Law Alpha:', alpha)
+    title = 'Degree Distribution for ' + graph_name + '\nPower Law Alpha Value: ' + alpha 
 
     x = np.arange(1, len(degree_list)+1)
     plt.title(title)
@@ -46,7 +47,7 @@ elif option == 'degreedist':
     plt.yscale('log')
     plt.plot(x, degree_list, 'bo')
     plt.grid(True)
-    save_name = graph_name + '_degree_dist.png' 
+    save_name = graph_name.replace('.', '_') + '_degree_dist.png' 
     plt.savefig(save_name)
 elif option == 'community':
     print('Community Detection')

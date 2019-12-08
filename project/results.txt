@@ -1,0 +1,74 @@
+Degree Correlation Unweighted
+
+Graph Analysis...
+--- Graph Load Time ---
+--- 348.23044776916504 seconds ---
+Degree Correlation
+r:  -0.02935031562004516
+--- Total Option Execution Time ---
+--- 1214.7012071609497 seconds ---
+--- Total Program Execution Time ---
+--- 1562.931734085083 seconds ---
+
+
+Degree Correlation Weighted
+
+Graph Analysis...
+--- Graph Load Time ---
+--- 345.1856064796448 seconds ---
+Degree Correlation
+r:  -0.0032564447069931765
+--- Total Option Execution Time ---
+--- 26399.354245185852 seconds ---
+--- Total Program Execution Time ---
+--- 26744.539931297302 seconds ---
+
+
+Global Correlation Coeffeciet Weighted
+
+Graph Analysis...
+--- Graph Load Time ---
+--- 345.4074218273163 seconds ---
+Global Clustering Coeffecient
+gcc: 1.6223920113609956e-08
+--- Total Option Execution Time ---
+--- 15024.481391429901 seconds ---
+--- Total Program Execution Time ---
+--- 15369.888889789581 seconds ---
+
+
+Global Correlation Coeffeciet Unweighted
+
+Graph Analysis...
+--- Graph Load Time ---
+--- 350.968364238739 seconds ---
+Global Clustering Coeffecient
+gcc: 0.012810122432379757
+--- Total Option Execution Time ---
+--- 14000.501201868057 seconds ---
+--- Total Program Execution Time ---
+--- 14351.46962594986 seconds ---
+
+
+GCP Nodes & Edges
+
+GML:
+Number of Nodes: 6284408
+Number of Edges: 49381844
+
+GPKL:
+Number of Nodes: 6284408
+Number of Edges: 49381844
+
+
+GCO Degree Correlation Unweighted
+
+Graph Analysis...
+--- Graph Load Time ---
+--- 102.59358739852905 seconds ---
+Degree Correlation
+r: -0.010008765205873692
+--- Total Option Execution Time ---
+--- 449.0421652793884 seconds ---
+--- Total Program Execution Time ---
+--- 551.6358299255371 seconds ---
