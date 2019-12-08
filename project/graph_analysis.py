@@ -87,6 +87,7 @@ elif option == 'lcc':
 elif option == 'meansp':
     print('Mean Shortest Path of LCC')
     largest_cc = G.subgraph(max(nx.connected_components(G), key=len)).copy()
+    print('LCC Obtained...')
     meansp = nx.average_shortest_path_length(largest_cc)
     print('MSP:', meansp)
 else:
