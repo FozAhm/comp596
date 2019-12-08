@@ -83,6 +83,11 @@ elif option == 'lcc':
     print('Percentage of Nodes in the LCC:', len(largest_cc)/len(G))
     lcc_name = graph_name_noextension + '_lcc.gpickle'
     nx.write_gpickle(G, lcc_name)
+elif option == 'meansp':
+    print('Mean Shortest Path of LCC')
+    largest_cc = G.subgraph(max(nx.connected_components(G), key=len)).copy()
+    meansp = nx.average_shortest_path_length(largest_cc)
+    print('MSP:', meansp)
 else:
     print('Wrong Option')
 
