@@ -17,6 +17,7 @@ read_format = sys.argv[2]
 option = sys.argv[3]
 
 graph_name = data_location.split('/')[-1]
+graph_name_noextension = graph_name.split('.')[0]
 
 if read_format == 'gml':
     G = nx.read_gml(data_location)
@@ -37,7 +38,7 @@ elif option == 'degreedist':
     results = powerlaw.Fit(degree_list, discrete=True)
     alpha = results.power_law.alpha
     print('Power Law Alpha:', alpha)
-    title = 'Degree Distribution for ' + graph_name + '\nPower Law Alpha Value: ' + str(alpha) 
+    title = 'Degree Distribution for ' + graph_name_noextension + '\nPower Law Alpha Value: ' + str(alpha) 
 
     x = np.arange(1, len(degree_list)+1)
     plt.title(title)
@@ -53,8 +54,13 @@ elif option == 'community':
     print('Community Detection')
     c = list(greedy_modularity_communities(G))
     print('Number of communities:', len(c))
-    print('Community 1:', c[0])
-    print('Community 2:', c[1])
+    file_name = graph_name_noextension + '_community.txt' 
+    f = open(file_name, 'a')
+    f.write('Community 1')
+    f.write(c[0])
+    f.write('Community 2')
+    f.write(c[1])
+    f.close()
 elif option == 'degreecorrel':
     print('Degree Correlation')
     r = nx.degree_pearson_correlation_coefficient(G, weight='weight')

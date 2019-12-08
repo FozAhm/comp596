@@ -50,6 +50,11 @@ gcc: 0.012810122432379757
 --- 14351.46962594986 seconds ---
 
 
+Degree Distribution
+
+Power Law Alpha: 1.441947788621313
+
+
 GCP Nodes & Edges
 
 GML:
@@ -61,7 +66,7 @@ Number of Nodes: 6284408
 Number of Edges: 49381844
 
 
-GCO Degree Correlation Unweighted
+GCP Degree Correlation Unweighted
 
 Graph Analysis...
 --- Graph Load Time ---
@@ -72,3 +77,8 @@ r: -0.010008765205873692
 --- 449.0421652793884 seconds ---
 --- Total Program Execution Time ---
 --- 551.6358299255371 seconds ---
+
+
+GCP Degree Distribution
+
+Power Law Alpha: 1.5814695063289108
