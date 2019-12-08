@@ -77,6 +77,12 @@ elif option == 'avgdeg':
         sum_of_degrees += value 
     avgdeg = sum_of_degrees/len(G)
     print(avgdeg)
+elif option == 'lcc':
+    print('Largest Connected Component')
+    largest_cc = G.subgraph(max(nx.connected_components(G), key=len)).copy()
+    print('Percentage of Nodes in the LCC:', len(largest_cc)/len(G))
+    lcc_name = graph_name_noextension + '_lcc.gpickle'
+    nx.write_gpickle(G, lcc_name)
 else:
     print('Wrong Option')
 
