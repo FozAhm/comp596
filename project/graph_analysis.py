@@ -82,7 +82,7 @@ elif option == 'avgdeg':
             highest_degree_node = key
     avgdeg = sum_of_degrees/len(G)
     print(avgdeg)
-    print('Node with Highest Degree')
+    print('Node with Highest Degree:', highest_degree, highest_degree_node)
     print(G.nodes[highest_degree_node])
 elif option == 'lcc':
     print('Largest Connected Component')
