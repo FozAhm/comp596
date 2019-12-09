@@ -73,10 +73,17 @@ elif option == 'avgdeg':
     print('Average Degree')
     degrees = list(G.degree(weight='weight'))
     sum_of_degrees = 0
+    highest_degree = 0
+    highest_degree_node = G.nodes['hartbeatnt']  #Just to initialize
     for key,value in degrees:
-        sum_of_degrees += value 
+        sum_of_degrees += value
+        if value > highest_degree:
+            highest_degree = value
+            highest_degree_node = key
     avgdeg = sum_of_degrees/len(G)
     print(avgdeg)
+    print('Node with Highest Degree')
+    print(G.nodes[highest_degree_node])
 elif option == 'lcc':
     print('Largest Connected Component')
     largest_cc = G.subgraph(max(nx.connected_components(G), key=len)).copy()
