@@ -85,13 +85,14 @@ Largest Connected Component
 
 Graph Analysis...
 --- Graph Load Time ---
---- 376.46112966537476 seconds ---
+--- 348.33944177627563 seconds ---
 Largest Connected Component
 Percentage of Nodes in the LCC: 0.5524676585164798
+LCC Saved
 --- Total Option Execution Time ---
---- 1845.3360266685486 seconds ---
+--- 1645.1046903133392 seconds ---
 --- Total Program Execution Time ---
---- 2221.8063702583313 seconds ---
+--- 1993.4442393779755 seconds ---
 
 
 GCP Nodes & Edges

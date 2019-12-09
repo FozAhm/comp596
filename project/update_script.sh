@@ -9,9 +9,9 @@ pip3 install networkx
 pip3 install matplotlib
 pip3 install numpy
 pip3 install scipy
-pip install powerlaw
+pip3 install powerlaw
 ssh-keygen -t rsa -b 4096 -q -N "" -f /home/ubuntu/.ssh/id_rsa
-aws s3 cp s3://comp-596-graph/github.gml /home/ubuntu/comp596/project/github.gml
 aws s3 cp s3://comp-596-graph/github.gpickle /home/ubuntu/comp596/project/github.gpickle
+aws s3 cp s3://comp-596-graph/github_gcp.gpickle /home/ubuntu/comp596/project/github_gcp.gpickle
 #cat .ssh/id_rsa.pub
 sudo reboot
