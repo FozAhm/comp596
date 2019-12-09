@@ -85,9 +85,9 @@ elif option == 'avgdeg':
     print('Node with Highest Degree:', highest_degree, highest_degree_node)
     print(G.nodes[highest_degree_node])
     print('First Edge')
-    print(G.edges(highest_degree_node)[0])
+    print(list(G.edges(highest_degree_node))[0])
     print('Second Edge')
-    print(G.edges(highest_degree_node)[1])
+    print(list(G.edges(highest_degree_node))[1])
 elif option == 'lcc':
     print('Largest Connected Component')
     largest_cc = G.subgraph(max(nx.connected_components(G), key=len)).copy()
