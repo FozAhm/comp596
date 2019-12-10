@@ -72,13 +72,19 @@ Average Degree Weighted
 
 Graph Analysis...
 --- Graph Load Time ---
---- 375.2144808769226 seconds ---
+--- 355.5778214931488 seconds ---
 Average Degree
 11.704129949657831
+Node with Highest Degree: 8904533 LombiqBot
+{'type': 'user'}
+First Edge
+('LombiqBot', 'Lombiq/OrchardCore')
+Second Edge
+('LombiqBot', 'Lombiq/Orchard-Token-Title')
 --- Total Option Execution Time ---
---- 131.79312562942505 seconds ---
+--- 128.16981506347656 seconds ---
 --- Total Program Execution Time ---
---- 507.00767731666565 seconds ---
+--- 483.747704744339 seconds ---
 
 
 Largest Connected Component
@@ -139,13 +145,19 @@ GCP Average Degree Weighted
 
 Graph Analysis...
 --- Graph Load Time ---
---- 106.50069212913513 seconds ---
+--- 100.08089017868042 seconds ---
 Average Degree
 1191.2197422573454
+Node with Highest Degree: 171808267 fe08d3c717adf2ae63592e4c9aec6e3e404d8e3e@davemloft.net
+{'type': 'user'}
+First Edge
+('fe08d3c717adf2ae63592e4c9aec6e3e404d8e3e@davemloft.net', 'orgads/msys2-runtime')
+Second Edge
+('fe08d3c717adf2ae63592e4c9aec6e3e404d8e3e@davemloft.net', 'vcgato29/msys2-runtime')
 --- Total Option Execution Time ---
---- 44.25351929664612 seconds ---
+--- 40.87413573265076 seconds ---
 --- Total Program Execution Time ---
---- 150.75429558753967 seconds ---
+--- 140.9550986289978 seconds ---
 
 
 GCP Largest Connected Component
@@ -159,3 +171,29 @@ Percentage of Nodes in the LCC: 0.7817181825241136
 --- 743.2626714706421 seconds ---
 --- Total Program Execution Time ---
 --- 850.4798991680145 seconds ---
+
+
+GCP Global Clustering Coeffecient Unweighted
+
+Graph Analysis...
+--- Graph Load Time ---
+--- 98.7356264591217 seconds ---
+Global Clustering Coeffecient
+gcc: 0.0
+--- Total Option Execution Time ---
+--- 134027.89772319794 seconds ---
+--- Total Program Execution Time ---
+--- 134126.63341212273 seconds ---
+
+
+GCP Global Clustering Coeffecient Weighted
+
+Graph Analysis...
+--- Graph Load Time ---
+--- 102.822922706604 seconds ---
+Global Clustering Coeffecient
+gcc: 0.0
+--- Total Option Execution Time ---
+--- 138587.34714007378 seconds ---
+--- Total Program Execution Time ---
+--- 138690.17014431953 seconds ---
